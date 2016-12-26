@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1482588463 source:c:\users\tzewei\desktop\mmu\1617 sem2\game physics\tutorials\tgd2251(tutorial)\107919_gphylab04b_box2dinsfml\gphylab04b_box2dinsfml\box2dinsfml.cpp
+	<SFML/Graphics.hpp>
+	<Box2D/Box2D.h>
+	"MyRectangle.h"
+	<iostream>
+	<sstream>
+	<vector>
+
+1482574536 c:\users\tzewei\desktop\mmu\1617 sem2\game physics\tutorials\tgd2251(tutorial)\107919_gphylab04b_box2dinsfml\gphylab04b_box2dinsfml\myrectangle.h
+	<SFML/Graphics.hpp>
+	<Box2D/Box2D.h>
+
+1482574532 source:c:\users\tzewei\desktop\mmu\1617 sem2\game physics\tutorials\tgd2251(tutorial)\107919_gphylab04b_box2dinsfml\gphylab04b_box2dinsfml\myrectangle.cpp
+	"MyRectangle.h"
+
+1482574532 source:c:\users\tzewei\desktop\mmu\1617 sem2\game physics\tutorials\tgd2251(tutorial)\107919_gphylab04b_box2dinsfml\gphylab04b_box2dinsfml\sfmltest\myrectangle.cpp
+	"MyRectangle.h"
+
+1482574536 c:\users\tzewei\desktop\mmu\1617 sem2\game physics\tutorials\tgd2251(tutorial)\107919_gphylab04b_box2dinsfml\gphylab04b_box2dinsfml\sfmltest\myrectangle.h
+	<SFML/Graphics.hpp>
+	<Box2D/Box2D.h>
+
+1482733617 source:c:\users\tzewei\desktop\mmu\1617 sem2\game physics\tutorials\tgd2251(tutorial)\107919_gphylab04b_box2dinsfml\gphylab04b_box2dinsfml\sfmltest\box2dinsfml.cpp
+	<SFML/Graphics.hpp>
+	<Box2D/Box2D.h>
+	"MyRectangle.h"
+	<iostream>
+	<sstream>
+	<vector>
+

@@ -1,19 +1,21 @@
+#ifndef MYCIRCLE_H
+#define MYCIRCLE_H
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 
 
-class MyRectangle
+class MyCircle
 {
  public:
-	sf::RectangleShape rect_;
+	sf::CircleShape circle;
 	b2Body* body_;
 	b2BodyDef bodyDef_;
-	b2PolygonShape bodyShape_;
+	b2CircleShape bodyShape_;
 	b2FixtureDef bodyFixtureDef_;
 	std:: string type;
 
-	MyRectangle(b2World& world,
-               sf::Vector2f size,
+	MyCircle(b2World& world,
+               float radius,
                sf::Vector2f position,
                float rotation = 0,
                bool isDynamic = true
@@ -21,7 +23,9 @@ class MyRectangle
 	void setFillColor(sf::Color col);
 	void setOutlineThickness(float thickness);
 	void setOutlineColor(sf::Color col);
-	void setRotation(float rotation);
 	void update();
 	sf::Shape& getShape();
 };
+
+
+#endif // MYCIRCLE_H

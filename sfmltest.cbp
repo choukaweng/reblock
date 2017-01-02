@@ -12,9 +12,24 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add option="-Wl,-V" />
 					<Add directory="../../GPhyLab04b_Box2DInSFML" />
+					<Add directory="C:/SFML/include" />
+					<Add directory="C:/Box2D/Build/Box2D" />
 				</Compiler>
+				<Linker>
+					<Add library="C:/Box2D/Build/Box2D/libBox2D.a" />
+					<Add library="C:/SFML/lib/libsfml-audio.a" />
+					<Add library="C:/SFML/lib/libsfml-graphics.a" />
+					<Add library="C:/SFML/lib/libsfml-main.a" />
+					<Add library="C:/SFML/lib/libsfml-network.a" />
+					<Add library="C:/SFML/lib/libsfml-system.a" />
+					<Add library="C:/SFML/lib/libsfml-window.a" />
+					<Add directory="C:/SFML/lib" />
+					<Add directory="C:/Box2D/Build" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/sfmltest" prefix_auto="1" extension_auto="1" />
@@ -33,6 +48,8 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="Box2DinSFML.cpp" />
+		<Unit filename="MyCircle.cpp" />
+		<Unit filename="MyCircle.h" />
 		<Unit filename="MyRectangle.cpp" />
 		<Unit filename="MyRectangle.h" />
 		<Extensions>

@@ -20,7 +20,7 @@ MyRectangle::MyRectangle(b2World& world,
 
 
 	bodyDef_.position = b2Vec2(position.x/PIXEL_PER_METER, position.y/PIXEL_PER_METER);
-
+    bodyDef_.angle = rotation;
 	if (isDynamic)
    {
       bodyDef_.type = b2_dynamicBody;
@@ -54,6 +54,7 @@ void MyRectangle::setOutlineColor(sf::Color col)
 {
 	rect_.setOutlineColor(col);
 }
+
 
 void MyRectangle::update()
 {

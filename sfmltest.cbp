@@ -48,6 +48,8 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="Box2DinSFML.cpp" />
+		<Unit filename="MyButton.cpp" />
+		<Unit filename="MyButton.h" />
 		<Unit filename="MyCircle.cpp" />
 		<Unit filename="MyCircle.h" />
 		<Unit filename="MyRectangle.cpp" />

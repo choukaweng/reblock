@@ -23,5 +23,6 @@ class MyRectangle
 	void setOutlineColor(sf::Color col);
 	void setRotation(float rotation);
 	void update();
+	void destroy(b2World &world);
 	sf::Shape& getShape();
 };

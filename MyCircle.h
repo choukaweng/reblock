@@ -24,6 +24,7 @@ class MyCircle
 	void setOutlineThickness(float thickness);
 	void setOutlineColor(sf::Color col);
 	void update();
+	void destroy(b2World &world);
 	sf::Shape& getShape();
 };
 

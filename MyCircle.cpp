@@ -63,6 +63,11 @@ void MyCircle::update()
     circle.setPosition( body_->GetPosition().x*PIXEL_PER_METER, body_->GetPosition().y*PIXEL_PER_METER);
 }
 
+void MyCircle::destroy(b2World &world)
+{
+    world.DestroyBody(body_);
+}
+
 sf::Shape& MyCircle::getShape()
 {
 	return circle;

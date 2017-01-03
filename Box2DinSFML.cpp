@@ -2,10 +2,18 @@
 #include <Box2D/Box2D.h>
 #include "MyRectangle.h"
 #include "MyCircle.h"
-
+#include "MyButton.h"
 #include <iostream>
 #include <sstream>  // for ostringstream
 #include <vector>
+#include <windows.h>
+
+//TGD 2251 - Game Physics
+//PROJECT #1 - RE:Block
+//Wee Tze Wei - 1131122882
+//Chou Ka Weng - 1132700796
+
+
 
 sf::Font loadFont(const std::string& fontFilename = "resources/04b03.ttf")
 {
@@ -19,23 +27,7 @@ sf::Font loadFont(const std::string& fontFilename = "resources/04b03.ttf")
 }
 bool mapGenerated = false;
 
-void generateUI()
-{
-    sf::Font font = loadFont();
-    sf::RectangleShape lvlOneBtn = sf::RectangleShape(sf::Vector2f(100,200));
-    sf::Text lvlOneBtnTxt;
-    lvlOneBtnTxt.setFont(font);
-	lvlOneBtnTxt.setCharacterSize(16);
-	lvlOneBtnTxt.setPosition(150,150);
-	lvlOneBtnTxt.setColor(sf::Color::Black);
-	lvlOneBtnTxt.setString("LEVEL ONE");
-	lvlOneBtn.setFillColor(sf::Color(255, 255, 255));
-    lvlOneBtn.setOutlineThickness(1);
-    lvlOneBtn.setOutlineColor(sf::Color::Black);
 
-
-
-}
 
 void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &boxList, std::vector<MyCircle> &ballList)
 {
@@ -54,8 +46,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.type = "red";
                 boxList.push_back(r);
 
-                std::cout << map[height][width] << std:: endl;
-
             }
             //standard blue
             else if(map[height][width] == 2){
@@ -65,7 +55,7 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setFillColor(sf::Color(0, 0, 255));
                 r.setOutlineThickness(1);
                 boxList.push_back(r);
-                std::cout << map[height][width] << std:: endl;
+
             }
             //standard RED: TO LEFT
             else if(map[height][width] == 3){
@@ -76,7 +66,7 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setOutlineColor(sf::Color::Black);
                 r.type = "red";
                 boxList.push_back(r);
-                std::cout << map[height][width] << std:: endl;
+
             }
              //standard RED: TO RIGHT
             else if(map[height][width] == 4){
@@ -89,8 +79,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.type = "red";
                 boxList.push_back(r);
 
-                std::cout << map[height][width] << std:: endl;
-
             }
             //standard BLUE: TO LEFT
              else if(map[height][width] == 5){
@@ -100,7 +88,7 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setFillColor(sf::Color(0, 0, 255));
                 r.setOutlineThickness(1);
                 boxList.push_back(r);
-                std::cout << map[height][width] << std:: endl;
+
             }
              //standard BLUE: TO RIGHT
             else if(map[height][width] == 6){
@@ -110,7 +98,7 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setFillColor(sf::Color(0, 0, 255));
                 r.setOutlineThickness(1);
                 boxList.push_back(r);
-                std::cout << map[height][width] << std:: endl;
+
             }
              //BLUE Ball
             else if(map[height][width] == 7){
@@ -122,7 +110,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 c.type = "blue";
                 ballList.push_back(c);
 
-                std::cout << map[height][width] << std:: endl;
             }
 
             //RED Ball
@@ -135,7 +122,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 c.type = "red";
                 ballList.push_back(c);
 
-                std::cout << map[height][width] << std:: endl;
             }
 
 
@@ -147,7 +133,7 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setOutlineThickness(1);
                 r.type = "platform";
                 boxList.push_back(r);
-                std::cout << map[height][width] << std:: endl;
+
 
             }
              else if(map[height][width] == 8.1){
@@ -157,7 +143,7 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setOutlineThickness(1);
                 r.type = "Xplatform";
                 boxList.push_back(r);
-                std::cout << map[height][width] << std:: endl;
+
 
             }
             //Long Platform
@@ -168,7 +154,7 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setOutlineThickness(1);
                 r.type = "platform";
                 boxList.push_back(r);
-                std::cout << map[height][width] << std:: endl;
+
 
             }
 
@@ -181,18 +167,18 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setOutlineThickness(1);
                 r.type = "platform";
                 boxList.push_back(r);
-                std::cout << map[height][width] << std:: endl;
+
 
             }
             //Tilted Platform
              else if(map[height][width] == 10){
                 sf::Vector2f pos = sf::Vector2f( width*dynamicBoxSize.x + (platformSize.x/2), height*dynamicBoxSize.y + (platformSize.y/2) );
-                MyRectangle r(world, platformSize, pos, 9.9, false);
+                MyRectangle r(world, platformSize, pos, 9.89, false);
                 r.setFillColor(sf::Color(0, 0, 0));
                 r.setOutlineThickness(1);
                 r.type = "platform";
                 boxList.push_back(r);
-                std::cout << map[height][width] << std:: endl;
+
 
             }
 
@@ -203,7 +189,7 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setOutlineThickness(1);
                 r.type = "platform";
                 boxList.push_back(r);
-                std::cout << map[height][width] << std:: endl;
+
 
             }
 
@@ -217,12 +203,35 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
 }
 
 
-void reset(std::vector<MyRectangle> &boxList, std::vector<MyCircle> &ballList, bool &gameOver)
+void generateUI(b2World &world, std::vector<MyButton> &UIList)
 {
+    sf::Vector2f btnSize(100,100);
+    sf::Vector2f pos1(200,300);
+    MyButton btn1(btnSize,pos1,"LEVEL 1");
+    UIList.push_back(btn1);
 
+    sf::Vector2f pos2(400,300);
+    MyButton btn2(btnSize,pos2,"LEVEL 2");
+    UIList.push_back(btn2);
+
+    sf::Vector2f pos3(600,300);
+    MyButton btn3(btnSize,pos3,"LEVEL 3");
+    UIList.push_back(btn3);
+
+}
+
+void reset(b2World &world, std::vector<MyRectangle> &boxList, std::vector<MyCircle> &ballList)
+{
+    for(int i=0; i<boxList.size(); i++)
+    {
+        world.DestroyBody(boxList[i].body_);
+    }
+    for(int i=0; i<ballList.size(); i++)
+    {
+        world.DestroyBody(ballList[i].body_);
+    }
     boxList.clear();
     ballList.clear();
-    gameOver = false;
 }
 
 int main()
@@ -248,7 +257,7 @@ int main()
 	// A vector/list of boxes
 	std::vector<MyRectangle> boxList;
 	std::vector<MyCircle> ballList;
-
+    std::vector<MyButton> UIList;
 
 	// Text creation
 	sf::Font font = loadFont();
@@ -258,13 +267,30 @@ int main()
 	text.setPosition(3, -3);
 	text.setColor(sf::Color::White);
 
+	//Winning Text Creation
+	sf::Text WinText;
+	WinText.setFont(font);
+	WinText.setCharacterSize(50);
+	WinText.setPosition(windowSizeX/2.8, windowSizeY/3);
+	WinText.setColor(sf::Color::White);
+
+    //Instruction Text
+    sf::Text InsText;
+	InsText.setFont(font);
+	InsText.setCharacterSize(25);
+	InsText.setPosition(windowSizeX/8, windowSizeY/6);
+	InsText.setColor(sf::Color::White);
+
 	// A buffer to check whether left mouse button has been clicked before or not
 	bool leftMousePressed = false;
     bool mapGenerated = false;
     bool gameOver = false;
     double map [20][24];
+    int level = 1;
+    sf::Text btnText1, btnText2, btnText3;
 
-	//GAME MAP - TZE WEI
+
+
 	//One Box is 64x64, and the horizontal screen can contain 12 boxes (768)
 	//vertical screen can contain 10 boxes (640)
 
@@ -283,6 +309,7 @@ int main()
       7 = Blue Ball
       -7 = Red Ball
       8 = Platform
+      8.1 = Clickable Platform
       9 = Long Platform
       -9 = Long Dynamic Platform
       10 = Tilted Long Platform (clockwise)
@@ -336,39 +363,40 @@ int main()
     };
 
      double map3[20][24] = {
+        {0, 0, -7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 8.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -9, 0, -9, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, -10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
 bool gameStart = false;
+
+while(window.isOpen())
+{
+
 while(!gameOver)
 {
 
 
  if(!gameStart)
  {
-    int choice;
-    std::cout<<"WHICH MAP?"<<std::endl;
-    std::cin>>choice;
 
-    switch(choice)
+    switch(level)
     {
         case 1:
             for(int i=0; i<20; i++)
@@ -391,10 +419,24 @@ while(!gameOver)
             }
              gameStart = true;
             break;
+
+        case 3:
+            for(int i=0; i<20; i++)
+            {
+                for(int j=0; j<20; j++)
+                {
+                    map[i][j] = map3[i][j];
+                }
+            }
+             gameStart = true;
+            break;
+
+        default:
+            gameStart = true;
+            break;
     }
-
+    std::cout<<"Fetching Map from Hogwarts....."<<std::endl;
  }
-
 
 
 
@@ -414,6 +456,7 @@ while(!gameOver)
        {
           generateMap(map,world,boxList,ballList);
           mapGenerated = true;
+          std::cout<<"Maps succefully generated."<<std::endl;
        }
 
 
@@ -424,11 +467,9 @@ while(!gameOver)
 			// Do not use this for game input
 			// Why? Delay issues
 			// READ SFML DOCUMENTATION!
-//			if(event.type == sf::Event::Closed)
-//				window.close();
+			if(event.type == sf::Event::Closed)
+				window.close();
 		}
-
-
 
 
 
@@ -453,6 +494,8 @@ while(!gameOver)
 
                     }
                 }
+
+
 				leftMousePressed = true;
 
 			}
@@ -473,6 +516,11 @@ while(!gameOver)
                     8,                //velocityIterations
                     3                 //positionIterations
                    );
+
+
+
+
+
 
 			// Update the objects that uses physics
             // check blue boxes
@@ -503,24 +551,21 @@ while(!gameOver)
 
             }
 
+
             if(red  == 0 ){
                 std::cout << "YOU WIN!" << std::endl;
-                std::cout<<"RESTART? (Y/N)"<<std::endl;
-                char ans;
-                std::cin>>ans;
+                WinText.setString("YOU WIN!");
+                gameOver = false;
+                gameStart = false;
+                mapGenerated = false;
 
-                if(ans == 'N')
-                {
-                    gameOver = true;
-                }
-                else
-                {
-                    gameStart = false;
-                    mapGenerated = false;
-                    reset(boxList, ballList, gameOver);
-                }
+
 
 			}
+			else
+            {
+                WinText.setString("");
+            }
 
 
 			// timeElapsedSinceLastFrame can be higher than fixedTimeStep,
@@ -542,16 +587,37 @@ while(!gameOver)
 
             window.draw(ballList[i].getShape());
 		}
+//		std::ostringstream boxListStream;
+//		boxListStream << boxList.size();
+//		text.setString("Number of boxes: "+boxListStream.str());
+
+		InsText.setString("Remove red blocks / balls from the scene.");
+
+//		window.draw(text);
+		window.draw(WinText);
+        window.draw(InsText);
 
 
-
-		std::ostringstream boxListStream;
-		boxListStream << boxList.size();
-		text.setString("Number of boxes: "+boxListStream.str());
-		window.draw(text);
 		window.display();
+
+
+		if(!gameStart)
+        {
+            Sleep(2000);
+            reset(world,boxList,ballList);
+            level++;
+        }
+
+
+        if(level > 3)
+        {
+           level = 1;
+        }
+
+
+
 	}
 
-
+}
 	return 0;
 }

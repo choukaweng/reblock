@@ -63,6 +63,11 @@ void MyRectangle::update()
     rect_.setPosition( body_->GetPosition().x*PIXEL_PER_METER, body_->GetPosition().y*PIXEL_PER_METER);
 }
 
+void MyRectangle::destroy(b2World &world)
+{
+    world.DestroyBody(body_);
+}
+
 sf::Shape& MyRectangle::getShape()
 {
 	return rect_;

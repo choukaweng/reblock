@@ -2,7 +2,6 @@
 #include <Box2D/Box2D.h>
 #include "MyRectangle.h"
 #include "MyCircle.h"
-#include "MyButton.h"
 #include <iostream>
 #include <sstream>  // for ostringstream
 #include <vector>
@@ -203,22 +202,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
 }
 
 
-void generateUI(b2World &world, std::vector<MyButton> &UIList)
-{
-    sf::Vector2f btnSize(100,100);
-    sf::Vector2f pos1(200,300);
-    MyButton btn1(btnSize,pos1,"LEVEL 1");
-    UIList.push_back(btn1);
-
-    sf::Vector2f pos2(400,300);
-    MyButton btn2(btnSize,pos2,"LEVEL 2");
-    UIList.push_back(btn2);
-
-    sf::Vector2f pos3(600,300);
-    MyButton btn3(btnSize,pos3,"LEVEL 3");
-    UIList.push_back(btn3);
-
-}
 
 void reset(b2World &world, std::vector<MyRectangle> &boxList, std::vector<MyCircle> &ballList)
 {
@@ -257,7 +240,7 @@ int main()
 	// A vector/list of boxes
 	std::vector<MyRectangle> boxList;
 	std::vector<MyCircle> ballList;
-    std::vector<MyButton> UIList;
+
 
 	// Text creation
 	sf::Font font = loadFont();

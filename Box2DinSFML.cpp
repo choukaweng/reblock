@@ -108,7 +108,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 c.setOutlineColor(sf::Color::Black);
                 c.type = "blue";
                 ballList.push_back(c);
-
             }
 
             //RED Ball
@@ -123,7 +122,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
 
             }
 
-
             //Platform
             else if(map[height][width] == 8){
                 sf::Vector2f pos = sf::Vector2f( width*dynamicBoxSize.x + (dynamicBoxSize.x/2), height*dynamicBoxSize.y + (dynamicBoxSize.y/4) );
@@ -132,8 +130,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setOutlineThickness(1);
                 r.type = "platform";
                 boxList.push_back(r);
-
-
             }
              else if(map[height][width] == 8.1){
                 sf::Vector2f pos = sf::Vector2f( width*dynamicBoxSize.x + (dynamicBoxSize.x/2), height*dynamicBoxSize.y + (dynamicBoxSize.y/2) );
@@ -142,7 +138,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setOutlineThickness(1);
                 r.type = "Xplatform";
                 boxList.push_back(r);
-
 
             }
             //Long Platform
@@ -153,7 +148,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setOutlineThickness(1);
                 r.type = "platform";
                 boxList.push_back(r);
-
 
             }
 
@@ -167,7 +161,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.type = "platform";
                 boxList.push_back(r);
 
-
             }
             //Tilted Platform
              else if(map[height][width] == 10){
@@ -177,8 +170,6 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setOutlineThickness(1);
                 r.type = "platform";
                 boxList.push_back(r);
-
-
             }
 
             else if(map[height][width] == -10){
@@ -188,12 +179,7 @@ void generateMap(double map[20][24], b2World &world, std::vector<MyRectangle> &b
                 r.setOutlineThickness(1);
                 r.type = "platform";
                 boxList.push_back(r);
-
-
             }
-
-
-
 
         }
         mapGenerated = true;
@@ -272,15 +258,6 @@ int main()
     int level = 1;
     sf::Text btnText1, btnText2, btnText3;
 
-
-
-	//One Box is 64x64, and the horizontal screen can contain 12 boxes (768)
-	//vertical screen can contain 10 boxes (640)
-
-
-    //map [ column numbers ][ row ]
-    // column = windowSizeY/dynamicBoxSize.y;
-    // row = windowSizeX/dynamicBoxSize.x;
     /*
       0 = Empty
       1 = Red Box (normal position)
@@ -422,8 +399,6 @@ while(!gameOver)
  }
 
 
-
-
     //calculate original number of blue boxes
     int blue = 0;
     for(int i = 0; i < boxList.size(); i++){
@@ -433,7 +408,6 @@ while(!gameOver)
     }
 
     //game loop
-
 
        if(!mapGenerated)
        {
@@ -447,17 +421,10 @@ while(!gameOver)
 		while (window.pollEvent(event));
 		{
 			// This is input handling via poll event
-			// Do not use this for game input
-			// Why? Delay issues
-			// READ SFML DOCUMENTATION!
 			if(event.type == sf::Event::Closed)
 				window.close();
 		}
 
-
-
-		// This is input handling without poll event
-		// READ SFML DOCUMENTATION!
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
       {
 
@@ -495,15 +462,7 @@ while(!gameOver)
 		if(timeElapsedSinceLastFrame >= fixedTimeStep)
 		{
 			// Step is used to update physics position/rotation
-			world.Step(fixedTimeStep, //update frequency
-                    8,                //velocityIterations
-                    3                 //positionIterations
-                   );
-
-
-
-
-
+			world.Step(fixedTimeStep, 8, 3);
 
 			// Update the objects that uses physics
             // check blue boxes
@@ -570,19 +529,12 @@ while(!gameOver)
 
             window.draw(ballList[i].getShape());
 		}
-//		std::ostringstream boxListStream;
-//		boxListStream << boxList.size();
-//		text.setString("Number of boxes: "+boxListStream.str());
 
 		InsText.setString("Remove red blocks / balls from the scene.");
-
-//		window.draw(text);
 		window.draw(WinText);
         window.draw(InsText);
 
-
 		window.display();
-
 
 		if(!gameStart)
         {
